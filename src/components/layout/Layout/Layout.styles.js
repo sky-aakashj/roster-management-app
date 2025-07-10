@@ -10,13 +10,16 @@ export const LayoutContainer = styled.div`
 export const MainContent = styled.div`
   display: flex;
   flex: 1;
-  overflow: hidden;
+  overflow-y: auto;
 `;
 
 export const Sidebar = styled.div`
-  width: 280px;
+  width: 360px;
   flex-shrink: 0;
   overflow-y: auto;
+  padding: 24px;
+  border-right: 1px solid ${({ theme }) => theme.colors.gray};
+  background: ${({ theme }) => theme.colors.white};
 `;
 
 export const ContentArea = styled.div`

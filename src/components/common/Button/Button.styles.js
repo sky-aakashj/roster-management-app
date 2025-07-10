@@ -21,6 +21,7 @@ const baseStyles = css`
   &:disabled {
     cursor: not-allowed;
     opacity: 0.7;
+    background: #bdbdbd;
   }
 `;
 
@@ -41,11 +42,11 @@ const sizeStyles = {
 
 const variantStyles = {
   primary: css`
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.terracota800};
     color: white;
 
     &:hover:not(:disabled) {
-      background-color: ${({ theme }) => theme.colors.primaryDark};
+      background-color: ${({ theme }) => theme.colors.terracota200};
     }
   `,
   secondary: css`
@@ -57,12 +58,13 @@ const variantStyles = {
     }
   `,
   outline: css`
-    background-color: transparent;
-    color: ${({ theme }) => theme.colors.primary};
-    border-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.terracota100};
+    color: ${({ theme }) => theme.colors.terracota800};
+    border-color: transparent;
 
     &:hover:not(:disabled) {
-      background-color: ${({ theme }) => theme.colors.primaryLight};
+      background-color: ${({ theme }) => theme.colors.terracota200};
+      color: ${({ theme }) => theme.colors.white};
     }
   `,
   ghost: css`

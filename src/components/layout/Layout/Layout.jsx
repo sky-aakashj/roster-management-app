@@ -9,11 +9,10 @@ const Layout = ({
   showFilters = true,
   currentView,
   onViewChange,
-  //   filters,
-  //   onFilterChange,
-  //   onApplyFilters,
-  //   onClearFilters,
-  //   clinics,
+  filters,
+  onFilterChange,
+  onApplyFilters,
+  onClearFilters,
 }) => {
   return (
     <S.LayoutContainer>
@@ -25,8 +24,12 @@ const Layout = ({
       <S.MainContent>
         {showFilters && (
           <S.Sidebar>
-            <div>sidebar here</div>
-            <FilterPanel />
+            <FilterPanel
+              filters={filters}
+              onFilterChange={onFilterChange}
+              onApplyFilters={onApplyFilters}
+              onClearFilters={onClearFilters}
+            />
             <SearchPanel />
           </S.Sidebar>
         )}
