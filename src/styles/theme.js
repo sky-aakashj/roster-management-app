@@ -1,0 +1,47 @@
+const theme = {
+  colors: {
+    primary: "#3f51b5",
+    primaryDark: "#303f9f",
+    primaryLight: "#c5cae9",
+    secondary: "#ff5722",
+    secondaryDark: "#e64a19",
+    secondaryLight: "#ffccbc",
+    grey800: "#4C4C4C",
+    mossGreen200: "#DBE7CC",
+    mossGreen900: "#4E6137",
+    text: "#4C4C4C",
+    textLight: "#757575",
+    white: "#ffffff",
+    grayLight: "#f5f5f5",
+    gray: "#e0e0e0",
+    grayDark: "#9e9e9e",
+    error: "#f44336",
+    success: "#4caf50",
+    warning: "#ff9800",
+  },
+  spacing: {
+    xs: "4px",
+    sm: "8px",
+    md: "16px",
+    lg: "24px",
+    xl: "32px",
+  },
+  borderRadius: {
+    sm: "4px",
+    md: "8px",
+    lg: "12px",
+  },
+  shadows: {
+    sm: "0 1px 3px rgba(0,0,0,0.12)",
+    md: "0 4px 6px rgba(0,0,0,0.1)",
+    lg: "0 10px 20px rgba(0,0,0,0.1)",
+  },
+  breakpoints: {
+    sm: "576px",
+    md: "768px",
+    lg: "992px",
+    xl: "1200px",
+  },
+};
+
+export default theme;
