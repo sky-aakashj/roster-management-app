@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Header from "../Header/Header";
 import FilterPanel from "../FilterPanel/FilterPanel";
@@ -13,24 +14,38 @@ const Layout = ({
   onFilterChange,
   onApplyFilters,
   onClearFilters,
+  providers,
+  selectedProviders,
+  onSelectProvider,
+  onRemoveProvider,
 }) => {
+  const [showSideBar, setShowSidebar] = useState(true);
   return (
     <S.LayoutContainer>
       <Header
         title={"Provider Calender"}
         currentView={currentView}
         onViewChange={onViewChange}
+        setShowSidebar={setShowSidebar}
+        showSidebar={showSideBar}
       />
       <S.MainContent>
-        {showFilters && (
+        {showSideBar && (
           <S.Sidebar>
-            <FilterPanel
-              filters={filters}
-              onFilterChange={onFilterChange}
-              onApplyFilters={onApplyFilters}
-              onClearFilters={onClearFilters}
+            {showFilters && (
+              <FilterPanel
+                filters={filters}
+                onFilterChange={onFilterChange}
+                onApplyFilters={onApplyFilters}
+                onClearFilters={onClearFilters}
+              />
+            )}
+            <SearchPanel
+              providers={providers}
+              onSelectProvider={onSelectProvider}
+              onRemoveProvider={onRemoveProvider}
+              selectedProviders={selectedProviders}
             />
-            <SearchPanel />
           </S.Sidebar>
         )}
         <S.ContentArea>
@@ -54,7 +69,10 @@ Layout.propTypes = {
   onFilterChange: PropTypes.func,
   onApplyFilters: PropTypes.func,
   onClearFilters: PropTypes.func,
-  clinics: PropTypes.array,
+  providers: PropTypes.array,
+  selectedProviders: PropTypes.array,
+  onSelectProvider: PropTypes.func,
+  onRemoveProvider: PropTypes.func,
 };
 
 export default Layout;

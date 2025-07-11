@@ -1,7 +1,8 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import * as S from "./Input.styles";
-import { FaSearch, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
+import { FiSearch } from "react-icons/fi";
 
 const Input = ({
   value,
@@ -38,7 +39,7 @@ const Input = ({
     if (icon === "search") {
       return (
         <S.InputIcon>
-          <FaSearch />
+          <FiSearch />
         </S.InputIcon>
       );
     }

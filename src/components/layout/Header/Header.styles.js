@@ -29,7 +29,7 @@ export const BackButton = styled.button`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.primaryLight};
+    background-color: ${({ theme }) => theme.colors.mossGreen200};
   }
 `;
 
