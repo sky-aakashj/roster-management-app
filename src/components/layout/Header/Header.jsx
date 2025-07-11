@@ -1,26 +1,19 @@
 import PropTypes from "prop-types";
-import * as S from "./Header.styles";
-import { FaListUl } from "react-icons/fa";
 import {
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
 } from "react-icons/md";
+import { FaListUl } from "react-icons/fa";
 import { FiCalendar } from "react-icons/fi";
+import * as S from "./Header.styles";
 
 const Header = ({
   currentView,
-  onViewChange,
+  handleViewToggle,
   title,
-  setShowSidebar,
   showSidebar,
+  onBackClick,
 }) => {
-  const handleViewToggle = (view) => {
-    onViewChange(view);
-  };
-  const onBackClick = () => {
-    setShowSidebar((prev) => !prev);
-  };
-
   return (
     <S.HeaderContainer>
       <S.BackButton onClick={onBackClick}>
@@ -51,10 +44,10 @@ const Header = ({
 
 Header.propTypes = {
   currentView: PropTypes.oneOf(["list", "calendar"]).isRequired,
-  onViewChange: PropTypes.func.isRequired,
+  handleViewToggle: PropTypes.func.isRequired,
   title: PropTypes.string,
-  setShowSidebar: PropTypes.func.isRequired,
   showSidebar: PropTypes.bool.isRequired,
+  onBackClick: PropTypes.func,
 };
 
 export default Header;

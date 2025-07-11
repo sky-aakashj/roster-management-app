@@ -6,10 +6,10 @@ import * as S from "./Layout.styles";
 import SearchPanel from "../SearchPanel/SearchPanel";
 
 const Layout = ({
-  //   children,
+  children,
   showFilters = true,
   currentView,
-  onViewChange,
+  handleViewToggle,
   filters,
   onFilterChange,
   onApplyFilters,
@@ -20,19 +20,22 @@ const Layout = ({
   onRemoveProvider,
 }) => {
   const [showSideBar, setShowSidebar] = useState(true);
+  const onBackClick = () => {
+    setShowSidebar((prev) => !prev);
+  };
   return (
     <S.LayoutContainer>
       <Header
         title={"Provider Calender"}
         currentView={currentView}
-        onViewChange={onViewChange}
-        setShowSidebar={setShowSidebar}
+        handleViewToggle={handleViewToggle}
         showSidebar={showSideBar}
+        onBackClick={onBackClick}
       />
       <S.MainContent>
         {showSideBar && (
           <S.Sidebar>
-            {showFilters && (
+            {showFilters && currentView === "list" && (
               <FilterPanel
                 filters={filters}
                 onFilterChange={onFilterChange}
@@ -49,7 +52,7 @@ const Layout = ({
           </S.Sidebar>
         )}
         <S.ContentArea>
-          <div>content here</div>
+          <div>{children}</div>
         </S.ContentArea>
       </S.MainContent>
     </S.LayoutContainer>
@@ -57,10 +60,10 @@ const Layout = ({
 };
 
 Layout.propTypes = {
-  //   children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   showFilters: PropTypes.bool,
   currentView: PropTypes.oneOf(["list", "calendar"]),
-  onViewChange: PropTypes.func,
+  handleViewToggle: PropTypes.func,
   filters: PropTypes.shape({
     services: PropTypes.array,
     types: PropTypes.array,
