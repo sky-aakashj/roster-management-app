@@ -12,6 +12,7 @@ export const NavigationButton = styled.button`
   background: none;
   border-radius: 40px;
   cursor: pointer;
+  outline: none;
   padding: 4px;
   border: 1px solid #e0e0e0;
   color: ${({ theme }) => theme.colors.mossGreen900};

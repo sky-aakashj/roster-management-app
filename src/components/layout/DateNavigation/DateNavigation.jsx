@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import * as S from "./DateNavigation.styles";
+import { SLOT_STATUS_COLORS } from "../../../utils/constants";
 
 const DateNavigation = () => {
   const selectedDate = useSelector((state) => state.date.selectedDate);
@@ -24,26 +25,28 @@ const DateNavigation = () => {
       <S.RightSection>
         <S.GroupLegend>
           <S.LegendItem>
-            <S.LegendColor color="#97CC55" /> Online
+            <S.LegendColor color={SLOT_STATUS_COLORS.online} /> Online
           </S.LegendItem>
           <S.LegendItem>
-            <S.LegendColor color="#355E80" /> Online Booked
-          </S.LegendItem>
-        </S.GroupLegend>
-        <S.GroupLegend>
-          <S.LegendItem>
-            <S.LegendColor color="#E76943" /> Offline
-          </S.LegendItem>
-          <S.LegendItem>
-            <S.LegendColor color="#80490B" /> Offline Booked
+            <S.LegendColor color={SLOT_STATUS_COLORS.online_booked} /> Online
+            Booked
           </S.LegendItem>
         </S.GroupLegend>
         <S.GroupLegend>
           <S.LegendItem>
-            <S.LegendColor color="#2196F3" /> Online + Offline
+            <S.LegendColor color={SLOT_STATUS_COLORS.offline} /> Offline
           </S.LegendItem>
           <S.LegendItem>
-            <S.LegendColor color="#C73031" /> Blocked
+            <S.LegendColor color={SLOT_STATUS_COLORS.offline_booked} /> Offline
+            Booked
+          </S.LegendItem>
+        </S.GroupLegend>
+        <S.GroupLegend>
+          <S.LegendItem>
+            <S.LegendColor color={SLOT_STATUS_COLORS.both} /> Online + Offline
+          </S.LegendItem>
+          <S.LegendItem>
+            <S.LegendColor color={SLOT_STATUS_COLORS.blocked} /> Blocked
           </S.LegendItem>
         </S.GroupLegend>
       </S.RightSection>

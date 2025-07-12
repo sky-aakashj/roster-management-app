@@ -11,6 +11,7 @@ const theme = {
     mossGreen100: "#EDF5E3",
     mossGreen200: "#DBE7CC",
     mossGreen900: "#4E6137",
+    mossGreen800: "#607447",
     terracota800: "#E76943",
     terracota100: "#FFF5F2",
     terracota200: "#f59b7f",
