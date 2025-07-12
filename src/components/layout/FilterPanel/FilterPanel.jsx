@@ -1,94 +1,116 @@
-import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setServiceFilter,
+  setTypeFilter,
+  setCenterFilter,
+  applyFilters,
+  clearFilters,
+} from "../../../redux/actions/filterActions";
 import Dropdown from "../../common/Dropdown/Dropdown";
 import Button from "../../common/Button/Button";
 import * as S from "./FilterPanel.styles";
 
-const FilterPanel = ({
-  filters,
-  onFilterChange,
-  onApplyFilters,
-  onClearFilters,
-}) => {
-  const [tempFilters, setTempFilters] = useState(filters);
+const FilterPanel = () => {
+  const dispatch = useDispatch();
+  const providers = useSelector((state) => state.providers);
+  const filters = useSelector((state) => state.filters);
 
-  useEffect(() => {
-    setTempFilters(filters);
-  }, [filters]);
+  // Dynamically derive all filter options from providers data
+  const getUniqueOptions = (transformFn) => {
+    const uniqueValues = new Set();
 
+    providers.allProviders.forEach((provider) => {
+      const value = transformFn(provider);
+      if (value !== undefined && value !== null) {
+        uniqueValues.add(value);
+      }
+    });
+
+    return Array.from(uniqueValues).map((value) => ({
+      value,
+      label:
+        typeof value === "string"
+          ? value.charAt(0).toUpperCase() + value.slice(1)
+          : String(value),
+    }));
+  };
+
+  // Service options - extract from provider_usertype
   const serviceOptions = [
-    { value: "therapist", label: "Therapist" },
-    { value: "psychiatrist", label: "Psychiatrist" },
+    { value: "allServices", label: "All Services" },
+    ...getUniqueOptions((p) => p.provider_usertype),
   ];
 
+  // Type options - convert is_inhouse boolean to 'inhouse'/'external'
   const typeOptions = [
-    { value: "inhouse", label: "In-house" },
-    { value: "external", label: "External" },
+    { value: "allTypes", label: "All Types" },
+    ...getUniqueOptions((p) => (p.is_inhouse ? "inhouse" : "external")),
   ];
 
   const centerOptions = [
-    { value: "clinic1", label: "Clinic 1" },
-    { value: "clinic2", label: "Clinic 2" },
-    { value: "clinic3", label: "Clinic 3" },
+    { value: "allCenters", label: "All Centers" },
+    ...providers.allProviders
+      .map((p) => p.clinic_details)
+      .filter(Boolean)
+      .filter(
+        (clinic, index, self) =>
+          index === self.findIndex((c) => c.id === clinic.id)
+      )
+      .map((clinic) => ({
+        value: clinic.id,
+        label: clinic.name,
+      })),
   ];
 
-  const handleServiceChange = (services) => {
-    setTempFilters((prev) => ({ ...prev, services }));
+  const handleServiceChange = (selected) => {
+    if (selected === filters.service) {
+      return;
+    }
+    dispatch(setServiceFilter(selected));
   };
 
-  const handleTypeChange = (types) => {
-    setTempFilters((prev) => ({ ...prev, types }));
+  const handleTypeChange = (selected) => {
+    if (selected === filters.type) {
+      return;
+    }
+    dispatch(setTypeFilter(selected));
   };
 
-  const handleCenterChange = (centers) => {
-    setTempFilters((prev) => ({ ...prev, centers }));
+  const handleCenterChange = (selected) => {
+    if (selected === filters.center) {
+      return;
+    }
+    dispatch(setCenterFilter(selected));
   };
 
   const handleApply = () => {
-    onFilterChange(tempFilters);
-    onApplyFilters();
+    dispatch(applyFilters());
   };
 
   const handleClear = () => {
-    const clearedFilters = {
-      services: [],
-      types: [],
-      centers: [],
-    };
-    setTempFilters(clearedFilters);
-    onFilterChange(clearedFilters);
-    onClearFilters();
+    dispatch(clearFilters());
   };
 
-  const hasFilters =
-    tempFilters.services.length > 0 ||
-    tempFilters.types.length > 0 ||
-    tempFilters.centers.length > 0;
+  const hasFilters = filters.service || filters.type || filters.center;
 
   return (
     <S.FilterContainer>
       <Dropdown
         options={serviceOptions}
-        value={tempFilters.services}
+        value={filters.service || null}
         onChange={handleServiceChange}
-        multiple
-        placeholder="All services"
       />
 
       <Dropdown
         options={typeOptions}
-        value={tempFilters.types}
+        value={filters.type || null}
         onChange={handleTypeChange}
-        multiple
-        placeholder="All types"
       />
 
       <Dropdown
         options={centerOptions}
-        value={tempFilters.centers}
+        value={filters.center || null}
         onChange={handleCenterChange}
-        multiple
-        placeholder="All centers"
       />
 
       <S.FilterActions>
@@ -108,17 +130,6 @@ const FilterPanel = ({
       </S.FilterActions>
     </S.FilterContainer>
   );
-};
-
-FilterPanel.propTypes = {
-  filters: PropTypes.shape({
-    services: PropTypes.array,
-    types: PropTypes.array,
-    centers: PropTypes.array,
-  }).isRequired,
-  onFilterChange: PropTypes.func.isRequired,
-  onApplyFilters: PropTypes.func.isRequired,
-  onClearFilters: PropTypes.func.isRequired,
 };
 
 export default FilterPanel;

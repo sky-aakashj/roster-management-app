@@ -10,10 +10,6 @@ const Layout = ({
   showFilters = true,
   currentView,
   handleViewToggle,
-  filters,
-  onFilterChange,
-  onApplyFilters,
-  onClearFilters,
   providers,
   selectedProviders,
   onSelectProvider,
@@ -35,14 +31,7 @@ const Layout = ({
       <S.MainContent>
         {showSideBar && (
           <S.Sidebar>
-            {showFilters && currentView === "list" && (
-              <FilterPanel
-                filters={filters}
-                onFilterChange={onFilterChange}
-                onApplyFilters={onApplyFilters}
-                onClearFilters={onClearFilters}
-              />
-            )}
+            {showFilters && currentView === "list" && <FilterPanel />}
             <SearchPanel
               providers={providers}
               onSelectProvider={onSelectProvider}
@@ -64,14 +53,6 @@ Layout.propTypes = {
   showFilters: PropTypes.bool,
   currentView: PropTypes.oneOf(["list", "calendar"]),
   handleViewToggle: PropTypes.func,
-  filters: PropTypes.shape({
-    services: PropTypes.array,
-    types: PropTypes.array,
-    centers: PropTypes.array,
-  }),
-  onFilterChange: PropTypes.func,
-  onApplyFilters: PropTypes.func,
-  onClearFilters: PropTypes.func,
   providers: PropTypes.array,
   selectedProviders: PropTypes.array,
   onSelectProvider: PropTypes.func,
