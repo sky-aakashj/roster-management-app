@@ -4,6 +4,7 @@ import { setCurrentView } from "../../redux/actions/viewActions";
 import { fetchProviders } from "../../redux/actions/providerActions";
 import { getFilteredProviders } from "../../redux/selectors";
 import Layout from "../../components/layout/Layout/Layout";
+import ListViewContainer from "../../components/layout/ListViewContainer/ListViewContainer";
 
 function RosterManagement() {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ function RosterManagement() {
     if (error) return <div>Error: {error}</div>;
 
     if (currentView === "list") {
-      return <div>List View Content</div>;
+      return <ListViewContainer />;
     }
     if (currentView === "calendar") {
       return <div>Calendar View Content</div>;

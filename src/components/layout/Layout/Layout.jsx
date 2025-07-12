@@ -40,9 +40,7 @@ const Layout = ({
             />
           </S.Sidebar>
         )}
-        <S.ContentArea>
-          <div>{children}</div>
-        </S.ContentArea>
+        <S.ContentArea>{children}</S.ContentArea>
       </S.MainContent>
     </S.LayoutContainer>
   );
