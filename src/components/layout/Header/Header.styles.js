@@ -62,7 +62,7 @@ export const ViewButton = styled.button`
   padding: 8px;
   border-radius: 8px;
   border: none;
-
+  outline: none;
   background: ${({ theme, active }) =>
     active ? theme.colors.mossGreen200 : theme.colors.white};
   color: ${({ theme, active }) =>

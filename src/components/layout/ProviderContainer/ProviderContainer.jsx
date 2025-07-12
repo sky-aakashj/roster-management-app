@@ -8,6 +8,14 @@ const ProviderContainer = () => {
   );
   const selectedDate = useSelector((state) => state.date.selectedDate);
 
+  if (!filteredProviders || filteredProviders.length === 0) {
+    return (
+      <S.NoProvidersMessage>
+        No providers available for the selected filters.
+      </S.NoProvidersMessage>
+    );
+  }
+
   return (
     <S.ProvidersList>
       {filteredProviders.map((provider) => (

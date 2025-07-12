@@ -10,10 +10,6 @@ const Layout = ({
   showFilters = true,
   currentView,
   handleViewToggle,
-  providers,
-  selectedProviders,
-  onSelectProvider,
-  onRemoveProvider,
 }) => {
   const [showSideBar, setShowSidebar] = useState(true);
   const onBackClick = () => {
@@ -32,12 +28,7 @@ const Layout = ({
         {showSideBar && (
           <S.Sidebar>
             {showFilters && currentView === "list" && <FilterPanel />}
-            <SearchPanel
-              providers={providers}
-              onSelectProvider={onSelectProvider}
-              onRemoveProvider={onRemoveProvider}
-              selectedProviders={selectedProviders}
-            />
+            <SearchPanel />
           </S.Sidebar>
         )}
         <S.ContentArea>{children}</S.ContentArea>

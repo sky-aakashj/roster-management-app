@@ -279,6 +279,6 @@ export const mockFetchProviders = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockProviders);
-    }, 1000); // Simulate network delay
+    }, 3000); // Simulate network delay
   });
 };
