@@ -5,6 +5,17 @@ export const ProviderSlotContainer = styled.div`
   overflow: hidden;
   padding: 24px;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px;
+    gap: 8px;
+  }
 `;
 
 export const LeftSection = styled.div`
@@ -13,6 +24,20 @@ export const LeftSection = styled.div`
   flex-direction: column;
   align-items: baseline;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 `;
 
 export const RightSection = styled.div`
@@ -22,10 +47,28 @@ export const RightSection = styled.div`
   border-radius: 8px;
   display: flex;
   align-items: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    flex: none;
+  }
 `;
+
 export const ProviderDetails = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 `;
 
 export const ProviderImage = styled.img`
@@ -33,6 +76,16 @@ export const ProviderImage = styled.img`
   height: 64px;
   border-radius: 64px;
   object-fit: cover;
+
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+  }
+
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 export const ProviderName = styled.h3`
@@ -42,12 +95,31 @@ export const ProviderName = styled.h3`
   text-decoration: underline;
   text-align: center;
   color: ${({ theme }) => theme.colors.mossGreen800};
+
+  @media (max-width: 768px) {
+    text-align: left;
+    font-size: 13px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+    text-align: center;
+  }
 `;
 
 export const IconsContainer = styled.div`
   display: flex;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 4px;
+  }
 `;
+
 export const Icon = styled.div`
   cursor: pointer;
   display: flex;
@@ -57,10 +129,12 @@ export const Icon = styled.div`
   padding: 2px 8px;
   background: #f7f7f7;
   border-radius: 8px;
+
   svg {
     width: 16px;
     height: 16px;
   }
+
   span {
     font-size: 14px;
     font-weight: 600;
@@ -70,6 +144,34 @@ export const Icon = styled.div`
 
   &:hover {
     color: #303f9f;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2px 6px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    span {
+      font-size: 12px;
+      margin-left: 2px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 2px 4px;
+
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    span {
+      font-size: 11px;
+      margin-left: 2px;
+    }
   }
 `;
 
@@ -86,11 +188,45 @@ export const ViewCalendarLink = styled.button`
   cursor: pointer;
   padding: 8px 0;
   text-decoration: underline;
+
   svg {
     width: 24px;
     height: 24px;
   }
+
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray};
+  }
+
+  @media (max-width: 768px) {
+    padding: 6px 0;
+    font-size: 13px;
+    gap: 4px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 4px 0;
+    font-size: 12px;
+    gap: 3px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+`;
+
+export const CalendarText = styled.span`
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
   }
 `;

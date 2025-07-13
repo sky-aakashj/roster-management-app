@@ -41,6 +41,14 @@ const WeekView = () => {
   const handleDateSelect = (date) => {
     dispatch(setSelectedDate(date));
   };
+  const isToday = (date) => {
+    const today = new Date();
+    return date.toDateString() === today.toDateString();
+  };
+
+  const isSelected = (date) => {
+    return date.toDateString() === selectedDate.toDateString();
+  };
 
   return (
     <S.WeekViewContainer>
@@ -49,14 +57,17 @@ const WeekView = () => {
       </S.NavigationButton>
 
       <S.WeekDaysContainer>
-        {weekDays.map((day, index) => (
+        {weekDays.map((day) => (
           <S.DayButton
-            key={index}
-            isActive={day.toDateString() === selectedDate.toDateString()}
+            key={`${day.getFullYear()}-${day.getMonth()}-${day.getDate()}`}
+            isActive={isSelected(day)}
+            isToday={isToday(day)}
             onClick={() => handleDateSelect(day)}
           >
-            <div>{day.toLocaleDateString("en-US", { weekday: "short" })}</div>
-            <div>{day.getDate()}</div>
+            <S.WeekdayText isActive={isSelected(day)}>
+              {day.toLocaleDateString("en-US", { weekday: "short" })}
+            </S.WeekdayText>
+            <S.DateText isActive={isSelected(day)}>{day.getDate()}</S.DateText>
           </S.DayButton>
         ))}
       </S.WeekDaysContainer>

@@ -91,7 +91,10 @@ const FilterPanel = () => {
     dispatch(clearFilters());
   };
 
-  const hasFilters = filters.service || filters.type || filters.center;
+  const hasFilters =
+    filters.service !== "allServices" ||
+    filters.type !== "allTypes" ||
+    filters.center !== "allCenters";
 
   return (
     <S.FilterContainer>

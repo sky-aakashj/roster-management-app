@@ -6,7 +6,6 @@ import {
   removeSelectedProvider,
   clearSelectedProviders,
 } from "../../../redux/actions/searchActions";
-import { CHIP_COLORS } from "../../../utils/constants";
 import * as S from "./SearchPanel.styles";
 import Input from "../../common/Input/Input";
 import Button from "../../common/Button/Button";
@@ -16,7 +15,9 @@ const SearchPanel = () => {
   const dispatch = useDispatch();
   const [localSearchTerm, setLocalSearchTerm] = useState("");
   const [showInfoText, setShowInfoText] = useState(true);
-  const { results, selectedProviders } = useSelector((state) => state.search);
+  const { results, selectedProviders, providerColors } = useSelector(
+    (state) => state.search
+  );
 
   // Debounce search
   useEffect(() => {
@@ -76,11 +77,11 @@ const SearchPanel = () => {
       {selectedProviders.length > 0 && (
         <>
           <S.SelectedProviders>
-            {selectedProviders.map((provider, index) => (
+            {selectedProviders.map((provider) => (
               <S.ProviderChip
                 key={provider.id}
                 style={{
-                  backgroundColor: CHIP_COLORS[index % CHIP_COLORS.length],
+                  backgroundColor: providerColors[provider.id],
                 }}
               >
                 {provider.name}

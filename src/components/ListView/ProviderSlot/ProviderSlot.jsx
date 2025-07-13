@@ -1,11 +1,22 @@
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { BiClinic } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
 import { PiVideoCamera } from "react-icons/pi";
 import TimeSlotGrid from "../TimeSlotGrid/TimeSlotGrid";
 import * as S from "./ProviderSlot.styles";
+import { addSelectedProvider } from "../../../redux/actions/searchActions";
+import { setCurrentView } from "../../../redux/actions/viewActions";
 
 const ProviderSlot = ({ provider, selectedDate }) => {
+  const dispatch = useDispatch();
+
+  const handleViewCalendar = () => {
+    // Add provider to selectedProviders
+    dispatch(addSelectedProvider(provider));
+    // Switch to calendar view
+    dispatch(setCurrentView("calendar"));
+  };
   return (
     <S.ProviderSlotContainer>
       <S.LeftSection>
@@ -23,8 +34,8 @@ const ProviderSlot = ({ provider, selectedDate }) => {
           </S.Icon>
         </S.IconsContainer>
 
-        <S.ViewCalendarLink onClick={() => console.log("View Calendar")}>
-          View Calendar <IoIosArrowForward />
+        <S.ViewCalendarLink onClick={handleViewCalendar}>
+          <S.CalendarText>View Calendar</S.CalendarText> <IoIosArrowForward />
         </S.ViewCalendarLink>
       </S.LeftSection>
 
@@ -36,8 +47,8 @@ const ProviderSlot = ({ provider, selectedDate }) => {
 };
 
 ProviderSlot.propTypes = {
-  providers: PropTypes.object.isRequired,
-  selectedDate: PropTypes.string.isRequired,
+  provider: PropTypes.object.isRequired,
+  selectedDate: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default ProviderSlot;

@@ -6,12 +6,14 @@ import {
   ADD_SELECTED_PROVIDER,
   REMOVE_SELECTED_PROVIDER,
   CLEAR_SELECTED_PROVIDERS,
+  SET_PROVIDER_COLORS,
 } from "../actionsTypes";
 
 const initialState = {
   term: "",
   results: [],
   selectedProviders: [],
+  providerColors: {},
   loading: false,
   error: null,
 };
@@ -63,6 +65,11 @@ export default function searchReducer(state = initialState, action) {
         selectedProviders: state.selectedProviders.filter(
           (provider) => provider.id !== action.payload
         ),
+      };
+    case SET_PROVIDER_COLORS:
+      return {
+        ...state,
+        providerColors: action.payload,
       };
 
     case CLEAR_SELECTED_PROVIDERS:

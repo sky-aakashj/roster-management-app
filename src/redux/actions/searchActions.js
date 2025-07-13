@@ -6,7 +6,9 @@ import {
   ADD_SELECTED_PROVIDER,
   REMOVE_SELECTED_PROVIDER,
   CLEAR_SELECTED_PROVIDERS,
+  SET_PROVIDER_COLORS,
 } from "../actionsTypes";
+import { CHIP_COLORS } from "../../utils/constants";
 
 // Sync actions
 export const setSearchTerm = (term) => ({
@@ -14,19 +16,35 @@ export const setSearchTerm = (term) => ({
   payload: term,
 });
 
-export const addSelectedProvider = (provider) => ({
-  type: ADD_SELECTED_PROVIDER,
-  payload: provider,
-});
+export const addSelectedProvider = (provider) => (dispatch, getState) => {
+  const { selectedProviders } = getState().search;
+  const colorIndex = selectedProviders.length % CHIP_COLORS.length;
+
+  dispatch({
+    type: ADD_SELECTED_PROVIDER,
+    payload: {
+      ...provider,
+      color: CHIP_COLORS[colorIndex],
+    },
+  });
+
+  // Update colors mapping
+  const providerColors = {};
+  [...selectedProviders, provider].forEach((p, i) => {
+    providerColors[p.id] = CHIP_COLORS[i % CHIP_COLORS.length];
+  });
+  dispatch(setProviderColors(providerColors));
+};
 
 export const removeSelectedProvider = (providerId) => ({
   type: REMOVE_SELECTED_PROVIDER,
   payload: providerId,
 });
 
-export const clearSelectedProviders = () => ({
-  type: CLEAR_SELECTED_PROVIDERS,
-});
+export const clearSelectedProviders = () => (dispatch) => {
+  dispatch({ type: CLEAR_SELECTED_PROVIDERS });
+  dispatch(setProviderColors({}));
+};
 
 // Async action for searching
 export const searchProviders = (term) => (dispatch, getState) => {
@@ -58,3 +76,8 @@ export const searchProviders = (term) => (dispatch, getState) => {
     });
   }
 };
+
+export const setProviderColors = (providerColors) => ({
+  type: SET_PROVIDER_COLORS,
+  payload: providerColors,
+});

@@ -4,14 +4,19 @@ import CalendarGrid from "../CalendarGrid/CalendarGrid";
 import * as S from "./CalendarView.styles";
 
 const CalendarView = () => {
-  const { viewMode } = useSelector((state) => state.calendar);
-  const selectedProviders = useSelector(
-    (state) => state.providers.selectedProviders
+  const { viewMode, currentdate, dateRange } = useSelector(
+    (state) => state.calendar
   );
+  const { selectedProviders } = useSelector((state) => state.search);
   return (
     <S.CalendarViewContainer>
       <CalendarHeader />
-      <CalendarGrid viewMode={viewMode} selectedProviders={selectedProviders} />
+      <CalendarGrid
+        viewMode={viewMode}
+        currentdate={currentdate}
+        dateRange={dateRange}
+        selectedProviders={selectedProviders}
+      />
     </S.CalendarViewContainer>
   );
 };

@@ -20,6 +20,13 @@ export const Sidebar = styled.div`
   padding: 24px;
   border-right: 1px solid ${({ theme }) => theme.colors.gray};
   background: ${({ theme }) => theme.colors.white};
+  @media (max-width: 768px) {
+    position: absolute;
+    height: 100vh;
+    width: 80vw;
+    z-index: 100;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 export const ContentArea = styled.div`

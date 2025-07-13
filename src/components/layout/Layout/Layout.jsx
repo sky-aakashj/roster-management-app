@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Header from "../Header/Header";
 import FilterPanel from "../FilterPanel/FilterPanel";
 import * as S from "./Layout.styles";
 import SearchPanel from "../SearchPanel/SearchPanel";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 const Layout = ({
   children,
@@ -11,7 +12,12 @@ const Layout = ({
   currentView,
   handleViewToggle,
 }) => {
+  const isMobile = useIsMobile();
   const [showSideBar, setShowSidebar] = useState(true);
+
+  useEffect(() => {
+    setShowSidebar(!isMobile);
+  }, [isMobile]);
   const onBackClick = () => {
     setShowSidebar((prev) => !prev);
   };
