@@ -4,6 +4,7 @@ import providerReducer from "./providerReducer";
 import filterReducer from "./filterReducer";
 import dateReducer from "./dateReducer";
 import searchReducer from "./searchReducer";
+import calendarReducer from "./calendarReducer";
 
 const rootReducer = combineReducers({
   view: viewReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   filters: filterReducer,
   date: dateReducer,
   search: searchReducer,
+  calendar: calendarReducer,
 });
 
 export default rootReducer;
