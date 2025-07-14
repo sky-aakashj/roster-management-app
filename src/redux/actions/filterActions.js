@@ -57,9 +57,16 @@ export const applyFilters = () => {
   };
 };
 
-export const clearFilters = () => ({
-  type: CLEAR_FILTERS,
-});
+export const clearFilters = () => {
+  return (dispatch, getState) => {
+    // First dispatch the clear action
+    dispatch({ type: CLEAR_FILTERS });
+
+    // Then reset the filtered providers to all providers
+    const { providers } = getState();
+    dispatch(applyFiltersSuccess(providers.allProviders));
+  };
+};
 export const applyFiltersSuccess = (filteredProviders) => ({
   type: APPLY_FILTERS_SUCCESS,
   payload: filteredProviders,
