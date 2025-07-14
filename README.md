@@ -4,7 +4,7 @@ A healthcare provider scheduling system with calendar views,searching, filtering
 
 ## Live Demo
 
-[View Live Demo](#myliveurl/)
+[View Live Demo](https://wellspring-roster.netlify.app/)
 
 ## Table of Contents
 
